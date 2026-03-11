@@ -25,7 +25,7 @@ const stagger = {
 
 function analyzeRisk(alloc: Record<string, number>) {
   const total = Object.values(alloc).reduce((s, v) => s + v, 0);
-  if (total === 0) return { score: 0, level: "Low", explanation: "", suggestion: "", volatilityScore: 0 };
+  if (total === 0) return { score: 0, level: "Low", explanation: "", suggestion: "", volatilityScore: 0, stabilityScore: 100 };
 
   // Weighted volatility
   let weightedVol = 0;
@@ -64,7 +64,10 @@ function analyzeRisk(alloc: Record<string, number>) {
     suggestion = "Reduce altcoin exposure and increase BTC or ETH allocation to stabilize the portfolio. Aim for no more than 20% in high-volatility assets.";
   }
 
-  return { score, level, explanation, suggestion, volatilityScore };
+  // Stability = inverse of risk, rewarding diversification and low volatility
+  const stabilityScore = Math.round(Math.min(100, Math.max(0, 100 - score)));
+
+  return { score, level, explanation, suggestion, volatilityScore, stabilityScore };
 }
 
 const Index = () => {
@@ -194,7 +197,7 @@ const Index = () => {
             </div>
             {hasAnalyzed && (
               <motion.div
-                className="mt-6 grid grid-cols-2 gap-4"
+                className="mt-6 grid grid-cols-3 gap-3"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.2 }}
@@ -204,8 +207,12 @@ const Index = () => {
                   <span className="font-display font-semibold text-lg tabular-nums text-foreground">{analysis.volatilityScore}%</span>
                 </div>
                 <div className="bg-secondary rounded-lg p-3 text-center">
-                  <span className="text-xs text-muted-foreground block">Score</span>
+                  <span className="text-xs text-muted-foreground block">Risk Score</span>
                   <span className="font-display font-semibold text-lg tabular-nums text-foreground">{analysis.score}/100</span>
+                </div>
+                <div className="bg-secondary rounded-lg p-3 text-center">
+                  <span className="text-xs text-muted-foreground block">Stability</span>
+                  <span className={`font-display font-semibold text-lg tabular-nums ${analysis.stabilityScore >= 67 ? "text-accent-green" : analysis.stabilityScore >= 34 ? "text-accent-yellow" : "text-accent-red"}`}>{analysis.stabilityScore}/100</span>
                 </div>
               </motion.div>
             )}
