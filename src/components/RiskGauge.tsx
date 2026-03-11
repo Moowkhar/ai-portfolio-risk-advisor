@@ -20,43 +20,60 @@ export const RiskGauge = ({ score, riskLevel }: RiskGaugeProps) => {
     return "text-accent-red";
   };
 
-  // Arc from -135deg to 135deg (270deg sweep)
   const radius = 80;
   const circumference = (270 / 360) * 2 * Math.PI * radius;
   const strokeDashoffset = circumference - (score / 100) * circumference;
 
   return (
-    <div className="flex flex-col items-center gap-4">
+    <div className="flex flex-col items-center gap-3">
       <div className="relative w-[220px] h-[140px]">
-        <svg
-          viewBox="0 0 200 130"
-          className="w-full h-full overflow-visible"
-        >
+        <svg viewBox="0 0 200 130" className="w-full h-full overflow-visible">
           {/* Background arc */}
           <path
             d="M 25 115 A 80 80 0 1 1 175 115"
             fill="none"
             stroke="hsl(var(--muted))"
-            strokeWidth="12"
+            strokeWidth="14"
             strokeLinecap="round"
           />
-          {/* Value arc */}
+          {/* Glow effect */}
           <motion.path
             d="M 25 115 A 80 80 0 1 1 175 115"
             fill="none"
             stroke={getColor()}
-            strokeWidth="12"
+            strokeWidth="14"
+            strokeLinecap="round"
+            strokeDasharray={circumference}
+            initial={{ strokeDashoffset: circumference }}
+            animate={{ strokeDashoffset }}
+            transition={spring}
+            filter="url(#glow)"
+          />
+          {/* Main arc */}
+          <motion.path
+            d="M 25 115 A 80 80 0 1 1 175 115"
+            fill="none"
+            stroke={getColor()}
+            strokeWidth="10"
             strokeLinecap="round"
             strokeDasharray={circumference}
             initial={{ strokeDashoffset: circumference }}
             animate={{ strokeDashoffset }}
             transition={spring}
           />
+          <defs>
+            <filter id="glow">
+              <feGaussianBlur stdDeviation="4" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+          </defs>
         </svg>
-        {/* Score display */}
         <div className="absolute inset-0 flex flex-col items-center justify-end pb-1">
           <motion.span
-            className="font-display font-bold text-6xl tracking-tighter tabular-nums text-foreground"
+            className="font-display font-bold text-5xl tracking-tighter tabular-nums text-foreground"
             key={score}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -67,11 +84,11 @@ export const RiskGauge = ({ score, riskLevel }: RiskGaugeProps) => {
         </div>
       </div>
       <div className="text-center">
-        <span className="text-xs font-medium tracking-widest uppercase text-muted-foreground">
+        <span className="text-[10px] font-medium tracking-widest uppercase text-muted-foreground">
           Risk Level
         </span>
         <motion.p
-          className={`font-display font-semibold text-xl ${getLevelColor()}`}
+          className={`font-display font-bold text-lg ${getLevelColor()}`}
           key={riskLevel}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
