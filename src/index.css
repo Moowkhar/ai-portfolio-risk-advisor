@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,47 +6,47 @@
 
 @layer base {
   :root {
-    --background: 0 0% 4%;
-    --foreground: 0 0% 92%;
+    --background: 0 0% 3%;
+    --foreground: 0 0% 93%;
 
-    --card: 0 0% 8%;
-    --card-foreground: 0 0% 92%;
+    --card: 0 0% 7%;
+    --card-foreground: 0 0% 93%;
 
-    --popover: 0 0% 8%;
-    --popover-foreground: 0 0% 92%;
+    --popover: 0 0% 7%;
+    --popover-foreground: 0 0% 93%;
 
     --primary: 45 100% 51%;
-    --primary-foreground: 0 0% 4%;
+    --primary-foreground: 0 0% 3%;
 
-    --secondary: 0 0% 12%;
-    --secondary-foreground: 0 0% 80%;
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 0 0% 75%;
 
-    --muted: 0 0% 14%;
-    --muted-foreground: 0 0% 50%;
+    --muted: 0 0% 13%;
+    --muted-foreground: 0 0% 45%;
 
-    --accent: 0 0% 12%;
-    --accent-foreground: 0 0% 92%;
+    --accent: 0 0% 10%;
+    --accent-foreground: 0 0% 93%;
 
     --destructive: 0 72% 51%;
-    --destructive-foreground: 0 0% 92%;
+    --destructive-foreground: 0 0% 93%;
 
-    --border: 0 0% 16%;
-    --input: 0 0% 16%;
+    --border: 0 0% 13%;
+    --input: 0 0% 13%;
     --ring: 45 100% 51%;
 
-    --radius: 0.75rem;
+    --radius: 0.5rem;
 
-    --accent-green: 142 71% 45%;
+    --accent-green: 145 63% 42%;
     --accent-yellow: 45 100% 51%;
-    --accent-red: 0 72% 51%;
+    --accent-red: 354 70% 54%;
 
-    --sidebar-background: 0 0% 6%;
-    --sidebar-foreground: 0 0% 50%;
+    --sidebar-background: 0 0% 5%;
+    --sidebar-foreground: 0 0% 45%;
     --sidebar-primary: 45 100% 51%;
-    --sidebar-primary-foreground: 0 0% 4%;
-    --sidebar-accent: 0 0% 12%;
-    --sidebar-accent-foreground: 0 0% 92%;
-    --sidebar-border: 0 0% 16%;
+    --sidebar-primary-foreground: 0 0% 3%;
+    --sidebar-accent: 0 0% 10%;
+    --sidebar-accent-foreground: 0 0% 93%;
+    --sidebar-border: 0 0% 13%;
     --sidebar-ring: 45 100% 51%;
   }
 }
@@ -63,11 +63,10 @@
 
   h1, h2, h3, h4, h5, h6 {
     font-family: 'IBM Plex Sans', system-ui, sans-serif;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.01em;
   }
 }
 
-/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 4px;
 }
@@ -79,31 +78,48 @@
   border-radius: 2px;
 }
 
-/* Tabular nums for data */
 .tabular-nums {
   font-variant-numeric: tabular-nums;
-  font-feature-settings: 'tnum' on, 'ss01' on;
+  font-feature-settings: 'tnum' on;
 }
 
-/* Slider thumb styling for Binance yellow */
+input[type="range"] {
+  height: 4px;
+}
+
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
   background: hsl(45 100% 51%);
   cursor: pointer;
-  border: 2px solid hsl(0 0% 4%);
-  box-shadow: 0 0 8px hsl(45 100% 51% / 0.4);
+  border: 2px solid hsl(0 0% 3%);
+  box-shadow: 0 0 0 2px hsl(45 100% 51% / 0.2);
+  transition: box-shadow 0.15s;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  box-shadow: 0 0 0 4px hsl(45 100% 51% / 0.3);
 }
 
 input[type="range"]::-moz-range-thumb {
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
   background: hsl(45 100% 51%);
   cursor: pointer;
-  border: 2px solid hsl(0 0% 4%);
-  box-shadow: 0 0 8px hsl(45 100% 51% / 0.4);
+  border: 2px solid hsl(0 0% 3%);
+  box-shadow: 0 0 0 2px hsl(45 100% 51% / 0.2);
+}
+
+/* Number input arrows hide */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
 }
