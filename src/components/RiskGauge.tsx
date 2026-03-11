@@ -25,36 +25,56 @@ export const RiskGauge = ({ score, riskLevel }: RiskGaugeProps) => {
   const strokeDashoffset = circumference - (score / 100) * circumference;
 
   return (
-    <div className="flex flex-col items-center gap-3">
-      <div className="relative w-[220px] h-[140px]">
+    <div className="flex flex-col items-center gap-2">
+      <div className="relative w-[200px] h-[130px]">
         <svg viewBox="0 0 200 130" className="w-full h-full overflow-visible">
+          {/* Tick marks */}
+          {[0, 25, 50, 75, 100].map((tick) => {
+            const angle = -135 + (tick / 100) * 270;
+            const rad = (angle * Math.PI) / 180;
+            const x1 = 100 + 92 * Math.cos(rad);
+            const y1 = 115 + 92 * Math.sin(rad);
+            const x2 = 100 + 86 * Math.cos(rad);
+            const y2 = 115 + 86 * Math.sin(rad);
+            return (
+              <line
+                key={tick}
+                x1={x1} y1={y1} x2={x2} y2={y2}
+                stroke="hsl(var(--muted-foreground))"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                opacity={0.4}
+              />
+            );
+          })}
           {/* Background arc */}
           <path
             d="M 25 115 A 80 80 0 1 1 175 115"
             fill="none"
             stroke="hsl(var(--muted))"
-            strokeWidth="14"
+            strokeWidth="8"
             strokeLinecap="round"
           />
-          {/* Glow effect */}
+          {/* Glow */}
           <motion.path
             d="M 25 115 A 80 80 0 1 1 175 115"
             fill="none"
             stroke={getColor()}
-            strokeWidth="14"
+            strokeWidth="12"
             strokeLinecap="round"
             strokeDasharray={circumference}
             initial={{ strokeDashoffset: circumference }}
             animate={{ strokeDashoffset }}
             transition={spring}
-            filter="url(#glow)"
+            opacity={0.15}
+            filter="url(#gaugeGlow)"
           />
           {/* Main arc */}
           <motion.path
             d="M 25 115 A 80 80 0 1 1 175 115"
             fill="none"
             stroke={getColor()}
-            strokeWidth="10"
+            strokeWidth="8"
             strokeLinecap="round"
             strokeDasharray={circumference}
             initial={{ strokeDashoffset: circumference }}
@@ -62,41 +82,32 @@ export const RiskGauge = ({ score, riskLevel }: RiskGaugeProps) => {
             transition={spring}
           />
           <defs>
-            <filter id="glow">
-              <feGaussianBlur stdDeviation="4" result="blur" />
-              <feMerge>
-                <feMergeNode in="blur" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
+            <filter id="gaugeGlow">
+              <feGaussianBlur stdDeviation="6" />
             </filter>
           </defs>
         </svg>
-        <div className="absolute inset-0 flex flex-col items-center justify-end pb-1">
+        <div className="absolute inset-0 flex flex-col items-center justify-end pb-2">
           <motion.span
-            className="font-display font-bold text-5xl tracking-tighter tabular-nums text-foreground"
+            className="font-mono font-bold text-4xl tracking-tight tabular-nums text-foreground"
             key={score}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
             transition={spring}
           >
             {score}
           </motion.span>
         </div>
       </div>
-      <div className="text-center">
-        <span className="text-[10px] font-medium tracking-widest uppercase text-muted-foreground">
-          Risk Level
-        </span>
-        <motion.p
-          className={`font-display font-bold text-lg ${getLevelColor()}`}
-          key={riskLevel}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.3 }}
-        >
-          {riskLevel}
-        </motion.p>
-      </div>
+      <motion.div
+        className={`font-mono font-bold text-sm ${getLevelColor()}`}
+        key={riskLevel}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.3 }}
+      >
+        {riskLevel}
+      </motion.div>
     </div>
   );
 };
