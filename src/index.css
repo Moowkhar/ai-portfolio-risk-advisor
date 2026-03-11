@@ -1,5 +1,4 @@
-@import url('https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -7,48 +6,48 @@
 
 @layer base {
   :root {
-    --background: 220 20% 8%;
-    --foreground: 210 20% 90%;
+    --background: 0 0% 4%;
+    --foreground: 0 0% 92%;
 
-    --card: 220 20% 12%;
-    --card-foreground: 210 20% 90%;
+    --card: 0 0% 8%;
+    --card-foreground: 0 0% 92%;
 
-    --popover: 220 20% 12%;
-    --popover-foreground: 210 20% 90%;
+    --popover: 0 0% 8%;
+    --popover-foreground: 0 0% 92%;
 
-    --primary: 200 100% 50%;
-    --primary-foreground: 220 20% 8%;
+    --primary: 45 100% 51%;
+    --primary-foreground: 0 0% 4%;
 
-    --secondary: 220 20% 16%;
-    --secondary-foreground: 210 20% 90%;
+    --secondary: 0 0% 12%;
+    --secondary-foreground: 0 0% 80%;
 
-    --muted: 220 15% 18%;
-    --muted-foreground: 210 15% 60%;
+    --muted: 0 0% 14%;
+    --muted-foreground: 0 0% 50%;
 
-    --accent: 220 20% 16%;
-    --accent-foreground: 210 20% 90%;
+    --accent: 0 0% 12%;
+    --accent-foreground: 0 0% 92%;
 
-    --destructive: 0 85% 60%;
-    --destructive-foreground: 210 20% 90%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 92%;
 
-    --border: 210 10% 23%;
-    --input: 210 10% 23%;
-    --ring: 60 90% 65%;
+    --border: 0 0% 16%;
+    --input: 0 0% 16%;
+    --ring: 45 100% 51%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
-    --accent-green: 140 80% 45%;
-    --accent-yellow: 45 90% 55%;
-    --accent-red: 0 85% 60%;
+    --accent-green: 142 71% 45%;
+    --accent-yellow: 45 100% 51%;
+    --accent-red: 0 72% 51%;
 
-    --sidebar-background: 220 20% 10%;
-    --sidebar-foreground: 210 15% 60%;
-    --sidebar-primary: 200 100% 50%;
-    --sidebar-primary-foreground: 220 20% 8%;
-    --sidebar-accent: 220 20% 16%;
-    --sidebar-accent-foreground: 210 20% 90%;
-    --sidebar-border: 210 10% 23%;
-    --sidebar-ring: 60 90% 65%;
+    --sidebar-background: 0 0% 6%;
+    --sidebar-foreground: 0 0% 50%;
+    --sidebar-primary: 45 100% 51%;
+    --sidebar-primary-foreground: 0 0% 4%;
+    --sidebar-accent: 0 0% 12%;
+    --sidebar-accent-foreground: 0 0% 92%;
+    --sidebar-border: 0 0% 16%;
+    --sidebar-ring: 45 100% 51%;
   }
 }
 
@@ -59,29 +58,52 @@
 
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: 'Satoshi', sans-serif;
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Inter', sans-serif;
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
     letter-spacing: -0.02em;
   }
 }
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 4px;
 }
 ::-webkit-scrollbar-track {
   background: hsl(var(--background));
 }
 ::-webkit-scrollbar-thumb {
   background: hsl(var(--border));
-  border-radius: 3px;
+  border-radius: 2px;
 }
 
 /* Tabular nums for data */
 .tabular-nums {
   font-variant-numeric: tabular-nums;
   font-feature-settings: 'tnum' on, 'ss01' on;
+}
+
+/* Slider thumb styling for Binance yellow */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: hsl(45 100% 51%);
+  cursor: pointer;
+  border: 2px solid hsl(0 0% 4%);
+  box-shadow: 0 0 8px hsl(45 100% 51% / 0.4);
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: hsl(45 100% 51%);
+  cursor: pointer;
+  border: 2px solid hsl(0 0% 4%);
+  box-shadow: 0 0 8px hsl(45 100% 51% / 0.4);
 }
