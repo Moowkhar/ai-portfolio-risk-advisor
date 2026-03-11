@@ -64,7 +64,10 @@ function analyzeRisk(alloc: Record<string, number>) {
     suggestion = "Reduce altcoin exposure and increase BTC or ETH allocation to stabilize the portfolio. Aim for no more than 20% in high-volatility assets.";
   }
 
-  return { score, level, explanation, suggestion, volatilityScore };
+  // Stability = inverse of risk, rewarding diversification and low volatility
+  const stabilityScore = Math.round(Math.min(100, Math.max(0, 100 - score)));
+
+  return { score, level, explanation, suggestion, volatilityScore, stabilityScore };
 }
 
 const Index = () => {
