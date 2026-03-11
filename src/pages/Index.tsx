@@ -211,6 +211,41 @@ const Index = () => {
             )}
           </motion.div>
 
+          {/* AI Explanation — directly below Risk Assessment */}
+          {hasAnalyzed && (
+            <motion.div
+              className="rounded-2xl bg-card p-6"
+              style={{ boxShadow: cardShadow }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={spring}
+            >
+              <span className="text-xs font-medium tracking-widest uppercase text-muted-foreground">
+                AI Explanation
+              </span>
+              <div className="mt-4 space-y-4">
+                <div className="flex items-center gap-2">
+                  <span className="text-xs font-medium tracking-widest uppercase text-muted-foreground">Risk Level:</span>
+                  <span className={`font-display font-semibold text-sm ${analysis.level === "Low" ? "text-accent-green" : analysis.level === "Moderate" ? "text-accent-yellow" : "text-accent-red"}`}>
+                    {analysis.level}
+                  </span>
+                </div>
+                <div>
+                  <h3 className="font-display font-semibold text-sm text-foreground mb-1">Reason</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">
+                    {analysis.explanation}
+                  </p>
+                </div>
+                <div className="border-t border-border pt-4">
+                  <h3 className="font-display font-semibold text-sm text-accent-green mb-1">Suggestion</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">
+                    {analysis.suggestion}
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          )}
+
           {/* Pie Chart */}
           <motion.div
             variants={stagger}
@@ -225,35 +260,6 @@ const Index = () => {
               <PortfolioPieChart segments={segments} />
             </div>
           </motion.div>
-
-          {/* AI Explanation */}
-          {hasAnalyzed && (
-            <motion.div
-              className="rounded-2xl bg-card p-6"
-              style={{ boxShadow: cardShadow }}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={spring}
-            >
-              <span className="text-xs font-medium tracking-widest uppercase text-muted-foreground">
-                AI Analysis
-              </span>
-              <div className="mt-4 space-y-4">
-                <div>
-                  <h3 className="font-display font-semibold text-sm text-foreground mb-1">Explanation</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
-                    {analysis.explanation}
-                  </p>
-                </div>
-                <div className="border-t border-border pt-4">
-                  <h3 className="font-display font-semibold text-sm text-accent-green mb-1">Suggestion</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
-                    {analysis.suggestion}
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-          )}
 
           {!hasAnalyzed && (
             <motion.div
