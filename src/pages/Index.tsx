@@ -25,7 +25,7 @@ const stagger = {
 
 function analyzeRisk(alloc: Record<string, number>) {
   const total = Object.values(alloc).reduce((s, v) => s + v, 0);
-  if (total === 0) return { score: 0, level: "Low", explanation: "", suggestion: "", volatilityScore: 0 };
+  if (total === 0) return { score: 0, level: "Low", explanation: "", suggestion: "", volatilityScore: 0, stabilityScore: 100 };
 
   // Weighted volatility
   let weightedVol = 0;
