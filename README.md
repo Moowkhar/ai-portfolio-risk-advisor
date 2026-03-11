@@ -46,6 +46,7 @@ Helps Binance traders quickly understand the risk level of their crypto portfoli
 ## Disclaimer
 
 This tool is for educational and analytical purposes only and does not constitute financial advice.
+
 Future Improvements
 
 * Real-time Binance API integration
