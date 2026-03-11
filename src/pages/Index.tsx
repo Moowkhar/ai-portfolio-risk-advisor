@@ -7,10 +7,10 @@ import { ArchitectureNote } from "@/components/ArchitectureNote";
 
 const ASSETS = [
   { key: "BTC", label: "BTC", color: "hsl(38, 90%, 55%)", volatility: 0.4 },
-  { key: "ETH", label: "ETH", color: "hsl(230, 70%, 60%)", volatility: 0.55 },
-  { key: "BNB", label: "BNB", color: "hsl(45, 90%, 50%)", volatility: 0.5 },
-  { key: "SOL", label: "SOL", color: "hsl(270, 70%, 60%)", volatility: 0.8 },
-  { key: "Other", label: "Other", color: "hsl(200, 60%, 50%)", volatility: 0.9 },
+  { key: "ETH", label: "ETH", color: "hsl(230, 70%, 60%)", volatility: 0.5 },
+  { key: "BNB", label: "BNB", color: "hsl(45, 90%, 50%)", volatility: 0.45 },
+  { key: "SOL", label: "SOL", color: "hsl(270, 70%, 60%)", volatility: 0.7 },
+  { key: "Other", label: "Other", color: "hsl(200, 60%, 50%)", volatility: 0.8 },
 ];
 
 const DEFAULT_ALLOC: Record<string, number> = { BTC: 20, ETH: 20, BNB: 20, SOL: 20, Other: 20 };
